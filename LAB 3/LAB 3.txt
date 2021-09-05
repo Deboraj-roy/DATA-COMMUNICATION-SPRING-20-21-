@@ -1,0 +1,167 @@
+
+%% 19-40158-1 DEBORAJ ROY
+Am=4;
+bit=3;
+f=1;
+fs=30;
+t = 0:1/fs:1*pi
+y=Am*sin(2*pi*f*t);
+Nsamples=length(y);
+quantised_out=zeros(1,Nsamples);
+del=2*Am/(2^bit); 
+Llow=-Am+del/2;
+Lhigh=Am-del/2;
+for i=Llow:del:Lhigh 
+ for j=1:Nsamples 
+ if(((i-del/2)<y(j))&&(y(j)<(i+del/2))) 
+ quantised_out(j)=i;
+ end 
+ end 
+end
+stem(t,quantised_out); 
+hold on;
+plot(t,y,'color','r');
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+%% 19-40158-1 DEBORAJ ROY
+
+fs=40e3;
+fc=4e3;
+t=0:1/fs:0.001;
+x=0.5*sin(2*pi*fc*t);
+%--------Quantization------------%
+n=8;
+L=(2^n)-1;
+delta=(max(x)-min(x))/L;
+xq=min(x)+(round((x-min(x))/delta)).*delta;
+%--------END------------%
+subplot(2,1,1)
+stem(t,x,'R');
+subplot(2,1,2);
+stem(t,x,'b');
+xlabel('time(s)')
+ylabel('X[n]')
+subplot(2,1,2);
+stairs(t,xq,'b');
+title('Quantized Signal')
+xlabel('time')
+ylabel('amplitude')
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+%% 19-40158-1 DEBORAJ ROY
+
+fs=40e3;
+fc=4e3;
+t=0:1/fs:0.001;
+x=0.5*sin(2*pi*fc*t);
+%--------Quantization------------%
+n=8;
+L=(2^n)-1;
+delta=(max(x)-min(x))/L;
+xq=min(x)+(round((x-min(x))/delta)).*delta;
+%--------END------------%
+subplot(2,1,1)
+stem(t,x,'R');
+subplot(2,1,2);
+stem(t,x,'b');
+xlabel('time(s)')
+ylabel('X[n]')
+subplot(2,1,2);
+stairs(t,xq,'b');
+axis([0 0.001 ,-1.5 1.5])
+title('Quantized Signal')
+xlabel('time')
+ylabel('amplitude')
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lab 2 
+
+
+fs = 10000;
+t = [0:1/fs:0.1];
+f = 10;
+sig = 2*sin(2*pi*f*t); 
+partition = [-1.5, -0.5, 0.5, 1.5]; 
+codebook = [-2:2];
+[index,quants] = quantiz(sig,partition,codebook);
+figure
+plot(t,sig,'x',t,quants,'.')
+legend('Original signal','Quantized signal');
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+fs = 10000;
+t = [0:1/fs:0.1];
+f = 10;
+sig = 2*sin(2*pi*f*t); 
+xmax = max (sig)
+xmin = min (sig)
+delta = ( xmax - xmin ) / 6 
+partition=[linspace(xmin+delta,xmax-delta,5)]; 
+codebook = [linspace(xmin, xmax, 6)];
+[index,quants] = quantiz(sig,partition,codebook);
+figure
+plot(t,sig,'-',t,quants,'.')
+legend('Original signal','Quantized signal');
+___________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+fs = 10000;
+t = [0:1/fs:0.1];
+f = 10;
+sig = 2*sin(2*pi*f*t); 
+xmax = max (sig)
+xmin = min (sig)
+delta = ( xmax - xmin ) / 6 
+partition=[linspace(xmin+delta,xmax-delta,5)]; 
+codebook = [linspace(xmin, xmax, 6)];
+[index,quants] = quantiz(sig,partition,codebook);
+figure
+plot(t,sig,'-',t,quants,'*')
+legend('Original signal','Quantized signal');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________________________________________________________________
+
+
+%%19-40158-1 DEBORAJ ROY
+A1=80;
+A2=15;
+fs=40000;
+t=0:5/fs:5-5/fs;
+x1=A1*cos(2*pi*(401*100)*t) ;
+n=4;
+L=(2^n)-1;
+delta= (max(x1) - min(x1))/L
+xq = min(x1)+(round((x1-min(x1))/delta)).*delta
+B = dec2bin((round((x1- min(x1))/delta)))
+fid = fopen('test.txt' , 'w');
+fprintf(fid, [repmat('%c',1,size(B,2)) '\r\n'], B.');
+fclose(fid);
+
+

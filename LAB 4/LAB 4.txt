@@ -1,0 +1,209 @@
+%19-40158-1 DEBORAJ ROY
+fs = 8000;
+t = 0:1/fs:1-1/fs; 
+cx = 1.1*sin(2*pi*100*t) + 1.3*cos(2*pi*300*t) +1.5*sin(2*pi*2000*t);
+bandwidth = obw(cx,fs); 
+L=2;
+BitRate = 2*bandwidth*log2(L)
+
+--------------------------------------------------------------------------------------------------------------
+
+%19-40158-1 DEBORAJ ROY
+clc;
+fs = 8000; 
+f = 400; 
+t = 0:1/fs:1-1/fs;
+A = 3.0;
+powfund = A^2/2
+s = 0.1;
+varnoise = s^2;
+signal = A*sin(2*pi*f*t);
+
+noise = s*randn(size(signal));
+
+noisySignal = signal + noise;
+SNR = snr(noisySignal) 
+defSNR = 10*log10(powfund/varnoise) 
+
+
+-------------------------------------------------------------------------------
+%19-40158-1 DEBORAJ ROY
+fs = 48e3;
+t = 0:1/fs:1-1/fs;
+A = 1.0;
+powfund = A^2/2;
+a = 0.4;
+powharm = a^2/2;
+s = 0.1;
+varnoise = s^2;
+x = A*cos(2*pi*1000*t) + a*sin(2*pi*2000*t) + s*randn(size(t));
+THD = thd(x);
+defTHD = 10*log10(powharm/powfund);
+TH = [THD defTHD]
+SINAD = sinad(x); 
+defSINAD = 10*log10(powfund/(powharm+varnoise));
+SI = [SINAD defSINAD]
+
+
+-------------------------------------------------------------------------------------------------------------------
+%19-40158-1 DEBORAJ ROY
+fs = 48e3;
+t = 0:1/fs:1-1/fs;
+A = 1.0;
+powfund = A^2/2;
+a = 0.4;
+powharm = a^2/2;
+s = 0.1;
+varnoise = s^2;
+x = A*cos(2*pi*1000*t) + a*sin(2*pi*2000*t) + s*randn(size(t));
+THD = thd(x);
+defTHD = 10*log10(powharm/powfund);
+TH = [THD defTHD]
+SINAD = sinad(x); 
+defSINAD = 10*log10(powfund/(powharm+varnoise));
+SI = [SINAD defSINAD]
+SNR = snr(x);
+bandwidth = obw(x,fs); 
+C = bandwidth*log2(1+SNR)
+--------------------------------------------------------------------------------------------------------------
+
+
+
+(a) Select the value of the amplitudes as follows: let A1 = AB, A2 = AF and s= 0.AH
+My id = 19-40158-1 
+So, A=1, B=9, C=4, D=0, E=1, F=5, G=8, H=1 
+
+A1 = 19;
+A2 = 15;
+s = 0.11;
+
+x = A1*sin(2π(4*100)t ) + A2*cos(2π(8*100)t) + s*randn(size(t));
+
+
+(b) Calculate the SNR value of the composite signal.
+
+%19-40158-1 DEBORAJ ROY
+fs = 8000; 
+f = 400;
+A1 = 19;
+A2 = 15;
+s = 0.11;
+t = 0:1/fs:1-1/fs;
+powfund = ((A1^2)+(A2^2))/2;
+s = 0.1;
+varnoise = s^2;
+signal = A1*sin(2*pi*(4*100)*t) + A2*cos(2*pi*(8*100)*t);
+noise = s*randn(size(t));
+noisySignal = signal + noise;
+SNR = snr(noisySignal)
+defSNR = 10*log10(powfund/varnoise)
+
+
+
+
+
+
+(c) Find the bandwidth of the signal and calculate the maximum capacity of the channel.
+
+%19-40158-1 DEBORAJ ROY
+fs = 8000; 
+f = 400;
+A1 = 19;
+A2 = 15;
+s = 0.11;
+t = 0:1/fs:1-1/fs;
+powfund = ((A1^2)+(A2^2))/2;
+s = 0.1;
+varnoise = s^2;
+signal = A1*sin(2*pi*(4*100)*t) + A2*cos(2*pi*(8*100)*t);
+noise = s*randn(size(t));
+noisySignal = signal + noise;
+SNR = snr(noisySignal)
+defSNR = 10*log10(powfund/varnoise)
+bandwidth = obw(signal,fs)
+capacity1=bandwidth*log2(1+SNR)
+capacity2=bandwidth*log2(1+defSNR)
+
+
+
+
+(d) What will be the signal level to achieve the data rate?
+
+
+%19-40158-1 DEBORAJ ROY
+fs = 8000; 
+f = 400;
+A1 = 19;
+A2 = 15;
+s = 0.11;
+t = 0:1/fs:1-1/fs;
+powfund = ((A1^2)+(A2^2))/2;
+s = 0.1;
+varnoise = s^2;
+signal = A1*sin(2*pi*(4*100)*t) + A2*cos(2*pi*(8*100)*t);
+noise = s*randn(size(t));
+noisySignal = signal + noise;
+SNR = snr(noisySignal)
+defSNR = 10*log10(powfund/varnoise)
+bandwidth = obw(signal,fs)
+capacity1=bandwidth*log2(1+SNR)
+capacity2=bandwidth*log2(1+defSNR)
+apprxDataRate1=floor(bandwidth*log2(1+SNR));
+apprxDataRate2=floor(bandwidth*log2(1+defSNR));
+level1=floor(2^(apprxDataRate1/(2*bandwidth)))
+level2=floor(2^(apprxDataRate2/(2*bandwidth)))
+
+
+
+
+--------------------------------------------------------------------------------------------------
+
+%19-40158-1 DEBORAJ ROY
+fs = 8000; 
+f = 400;
+A1 = 19;
+A2 = 15;
+s = 0.11;
+t = 0:1/fs:1-1/fs;
+powfund = ((A1^2)+(A2^2))/2;
+s = 0.1;
+varnoise = s^2;
+x = A1*sin(2*pi*(4*100)*t) + A2*cos(2*pi*(8*100)*t) + s*randn(size(t));
+THD = thd(x);
+defTHD = 10*log10(powharm/powfund);
+TH = [THD defTHD]
+SINAD = sinad(x); 
+defSINAD = 10*log10(powfund/(powharm+varnoise));
+SI = [SINAD defSINAD]
+SNR = snr(x);
+bandwidth = obw(x,fs)
+C = bandwidth*log2(1+SNR) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

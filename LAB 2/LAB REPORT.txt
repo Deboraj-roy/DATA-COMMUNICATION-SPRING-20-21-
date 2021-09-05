@@ -1,0 +1,41 @@
+% 19-40158-1 DEBORAJ ROY
+fs = 1000;
+t = (-2:1/fs:2)
+x1 = 80*cos(2 * pi * 4 * 100 *t ) ;
+x2 = 15*cos(2 * pi * 5 * 100 *t ) ;
+x3 = x1 + x2 ;
+figure('name','Signals of different Frequencies') ;
+plot(t,x3,'k--o','LineWidth',1.5) ;
+xlabel('time') ;
+ylabel('Amplitude') ;
+title('Signals of different Frequencies');
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+% 19-40158-1 DEBORAJ ROY
+fs = 1000;
+t = (-2:1/fs:2)
+x1 = 80*cos(2 * pi * 4 * 100 *t ) ;
+x2 = 15*cos(2 * pi * 5 * 100 *t ) ;
+x3 = x1 + x2 ;
+figure('name','Signals of different Frequencies') ;
+plot(t,x3,'k--o','LineWidth',1.5) ;
+xlabel('time') ;
+ylabel('Amplitude') ;
+title('Signals of different Frequencies');
+
+fx3 = fft(x3);
+fx3 = fftshift(fx3)/(fs/2);
+f = fs/2*linspace(-1,1,fs*4+1);
+figure('name','FREQUENCY DOMAIN');
+plot(f, abs(fx3),'LineWidth',1);
+title('FREQUENCY DOMAIN');
+axis([-2500 2500 0 5]);
+xlabel('Frequency (Hz)');
+ylabel('magnitude');
+bandwidth = obw(x3,fs)
+
+___________________________________________________________________________________________________________________________________
